@@ -11,6 +11,8 @@
     <a href="liste-patient.php">liste des patients</a>
     <br>
     <br>
+    
+<!-- Formulaire d'ajout des rendez vous avec 5 inputs -->
     <form action="enregistrement_patient.php" method="post">
         <input type="text" placeholder="prénom" name="firstname" required>
         <input type="text" placeholder="nom" name="lastname" required>

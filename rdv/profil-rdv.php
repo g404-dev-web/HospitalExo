@@ -1,16 +1,16 @@
 <?php
-
+//connexion à la base de données
 include '../conexion.php';
-
+//récupération du numéro id du rendez vous
 $rdvId = $_POST['rdvId'];
 
+// Préparation de la requête de récupération pars numéro id 
 $rdvInfobyId = $bdd->prepare("SELECT * FROM appointments WHERE id = ?");
 
-$rdvInfobyId->execute(array(
-    $rdvId
-));
+//remplacement des ? de la requête SQL par les données récuperé du formulaire
+$rdvInfobyId->execute(array($rdvId));
 
-
+//récupération des données de la requête (une seul réponse)
 $rdv = $rdvInfobyId->fetch();
 
 
@@ -26,7 +26,7 @@ $rdv = $rdvInfobyId->fetch();
     <title>Document</title>
 </head>
 <body>
-  
+  <!-- formulaire de modification qui contient en valeur les données existantes en base de donnée -->
     <form action="modification_rdv.php" method="POST">
 
         <input type="datetime" name="date" value="<?php echo $rdv['dateHour']?>" required>

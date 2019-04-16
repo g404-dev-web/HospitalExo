@@ -9,12 +9,14 @@
     <script src="main.js"></script>
 </head>
 <body>
-
     <a href="liste-rdv.php"> liste des RDV</a>
+
+<!-- Formulaire d'ajout des rendez vous avec 3 inputs -->
     <form action="enregistrement_rdv.php" method="post">
         <input type="date" name="date" required>
         <input type="time" name="hour" min="8:00" max="19:00" required>
         <input type="text" name="idPatients" required>
+
         <button type="submit">pousse</button>
     </form>  
 </body>

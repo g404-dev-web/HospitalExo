@@ -1,7 +1,11 @@
 <?php
+
+//connexion à la base de donnée
 include '../conexion.php';
 
+//requête de sélection de tous les patients
 $reponse = $bdd->query("SELECT * FROM patients");
+//récupération des données de la requête
 $patients = $reponse->fetchAll()
 ?>
 <!DOCTYPE html>
@@ -20,6 +24,7 @@ $patients = $reponse->fetchAll()
     <br>
     <br>
     <?php
+    //boucle d'affichage des patients
     foreach ($patients as $patient) {
         echo " numéro client : " . $patient['id'] . "<br>";
         echo " nom : " . $patient['lastname'] . "<br>";
@@ -31,6 +36,7 @@ $patients = $reponse->fetchAll()
     <form action="profil-patient.php" method="POST">
         <select name="patientId">
            <?php 
+            //boucle qui affiche une liste d'option pour chaque id patients
             foreach($patients as $patient){
                 echo "<option>". $patient['id'] ."</option>";
             }

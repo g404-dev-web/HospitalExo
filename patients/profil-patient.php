@@ -1,16 +1,18 @@
 <?php
-
+//connexion à la base de données
 include '../conexion.php';
-
+//récupération du numéro id du patient
 $patientId = $_POST['patientId'];
 
+// Préparation de la requête de récupération pars numéro id 
 $patientInfobyId = $bdd->prepare("SELECT * FROM patients WHERE id = ?");
 
+//remplacement des ? de la requête SQL par les données récuperé du formulaire
 $patientInfobyId->execute(array(
     $patientId
 ));
 
-
+//récupération des données de la requête (une seul réponse)
 $patient = $patientInfobyId->fetch();
 
 
@@ -33,6 +35,7 @@ $patient = $patientInfobyId->fetch();
         <li>Tél : <?php echo $patient['phone']?></li>
         <li>e-Mail : <?php echo $patient['mail']?></li>
     </ul>
+  <!-- formulaire de modification qui contient en valeur les données existantes en base de donnée -->
 
     <form action="modification-patient.php" method="POST">
         <input type="text" name="lastname" value="<?php echo $patient['lastname']?>" required>
