@@ -13,7 +13,6 @@ $rdvInfobyId->execute(array($rdvId));
 //récupération des données de la requête (une seul réponse)
 $rdv = $rdvInfobyId->fetch();
 
-
 ?>
 
 <!DOCTYPE html>

@@ -15,11 +15,16 @@ foreach($appointments as $appointment){
     echo "<br>".$appointment['id']; 
     echo "<br>".$appointment['dateHour']; 
     echo "<br>". $appointment['lastname']."<br>";
+    echo    "<form action='delete-rdv.php' method='post'>
+            <input type='hidden' name='rdvId' value=".$appointment['id'].">
+            <button type='submit'>Supprimer ce rdv</button>
+            
+            </form>";
 }
 ?>
 <br>
 <h3>Selection d'un rdv pour plus d'informations</h3>
-
+<form action="" method="post"></form>
 <!-- formulaire de sélection du numéro id des rendez vous -->
 <form action="profil-rdv.php" method="POST">
     <select name="rdvId">
@@ -29,5 +34,5 @@ foreach($appointments as $appointment){
         }
         ?>
     </select>
-    <button>Ok</button>
+    <button type="submit">Ok</button>
 </form>

@@ -29,6 +29,11 @@ $patients = $reponse->fetchAll()
         echo " numéro client : " . $patient['id'] . "<br>";
         echo " nom : " . $patient['lastname'] . "<br>";
         echo " prenom : " . $patient['firstname'] . "<br>";
+        echo    "<form action='delete-patient.php' method='post'>
+        <input type='hidden' name='patientId' value=".$patient['id'].">
+        <button type='submit'>Supprimer ce patient</button>
+        
+        </form>";
         echo "<br>";
     }
     ?>
