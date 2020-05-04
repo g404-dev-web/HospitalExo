@@ -4,3 +4,10 @@ form{
 input{
   display: block;
 }
+.logo {
+  text-align:center;
+}
+.patient {
+  width:18rem;
+  display:inline-block;
+}

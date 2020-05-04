@@ -1,6 +1,6 @@
 <?php
 //connexion à la base de donnée
-include '../conexion.php';
+include '../connexion.php';
 
 //récupération des valeurs des inputs du formulaire dans ajout-patient.php
 $lastname = $_POST['lastname'];

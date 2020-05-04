@@ -1,8 +1,8 @@
 <?php
 //connexion à la base de données
-include '../conexion.php';
+include '../connexion.php';
 //récupération du numéro id du patient
-$patientId = $_POST['patientId'];
+$patientId = $_REQUEST['patientId'];
 
 // Préparation de la requête de récupération pars numéro id 
 $patientInfobyId = $bdd->prepare("  SELECT * FROM patients 
@@ -32,13 +32,14 @@ $appointments = $patientAppointments->fetchAll();
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Profil du patient <?=$patient['lastname']?> <?=$patient['firstname']?></title>
+    <?php include($_SERVER['DOCUMENT_ROOT'] . '/partials/head.php'); ?>
 </head>
 <body>
+
+<?php include($_SERVER['DOCUMENT_ROOT'].'/partials/header.php'); ?>
+
+<div class="container">
     <!-- affichage des infos du patient -->
     <ul>
         <li>Nom : <?php echo $patient['lastname']?></li>
@@ -49,13 +50,13 @@ $appointments = $patientAppointments->fetchAll();
     </ul>
     <h4>Liste des rendez vous :</h4>
     <?php
-        //affichage de tous les rendez vous du patient
-        foreach ($appointments as $appointment) {
-            echo "<p>ce patient à rendez vous le : ".$appointment["dateHour"] ."</p>";
-        }
+    //affichage de tous les rendez vous du patient
+    foreach ($appointments as $appointment) {
+        echo "<p>ce patient à rendez vous le : ".$appointment["dateHour"] ."</p>";
+    }
     ?>
 
-  <!-- formulaire de modification qui contient en valeur les données existantes en base de donnée -->
+    <!-- formulaire de modification qui contient en valeur les données existantes en base de donnée -->
 
     <h3>Modifier le patient</h3>
     <form action="modification-patient.php" method="POST">
@@ -67,5 +68,7 @@ $appointments = $patientAppointments->fetchAll();
         <input type="hidden" name="patientId" value="<?php echo $patient['id']?>">
         <button type="submit">Envoyer</button>
     </form>
+</div>
+
 </body>
 </html>
