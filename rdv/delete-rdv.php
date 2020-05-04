@@ -6,8 +6,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/connexion.php');
 $id = $_POST['rdvId'];
 
 //préparation de la requête de suppression
-$req = $bdd->prepare("DELETE FROM appointments
-                      WHERE id = ?");
+$req = $bdd->prepare("DELETE FROM appointments WHERE id = ?");
 //remplacement des ? de la requête SQL par les données récuperé
 $req->execute(array($id));
 

@@ -1,24 +1,43 @@
 <?php
 
 //connexion à la base de donnée
-require_once($_SERVER['DOCUMENT_ROOT'].'/connexion.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/connexion.php');
 
+// Paramètres de configuration
 $page = isset($_REQUEST['p']) ? (int)$_REQUEST['p'] : 1;
 $resultsPerPage = 5;
+
+// Calcul du offset
 $offset = ($page - 1) * $resultsPerPage;
 
 // Compter le nombre de résultats pour la pagination
 $patientsCount = $bdd->query('SELECT count(*) FROM patients')->fetchColumn();
 $pageCount = ceil($patientsCount / $resultsPerPage);
 
-//requête de sélection de tous les patients
-$reponse = $bdd->query("SELECT * FROM patients LIMIT $resultsPerPage OFFSET $offset");
+
+if (isset($_REQUEST["s"])) {
+    //requête de sélection de tous les patients
+    $patientsStatement = $bdd->prepare(
+        "SELECT * 
+          FROM patients 
+          WHERE firstname LIKE ?
+          OR lastname LIKE ?
+          OR phone LIKE ?
+          OR mail LIKE ?"
+    );
+    $s = '%'.$_REQUEST["s"].'%';
+    $patientsStatement->execute([$s,$s,$s,$s]);
+} else {
+    //requête de sélection de tous les patients
+    $patientsStatement = $bdd->query("SELECT * FROM patients LIMIT $resultsPerPage OFFSET $offset");
+}
+
 //récupération des données de la requête
-$patients = $reponse->fetchAll();
+$patients = $patientsStatement->fetchAll();
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <title>Liste des patients</title>
@@ -35,7 +54,14 @@ $patients = $reponse->fetchAll();
     <h1>Liste des patients</h1>
 
     Il y a <?= $patientsCount ?> patient(s).<br>
+
     <a href="ajout-patient.php" class='btn btn-secondary'>Ajouter un patient</a>
+
+    <form>
+        <label for="search">Recherche</label> <input id="search" type="text" name="s">
+        <button>🔍</button>
+    </form>
+
     <br>
     <br>
     <?php
@@ -55,28 +81,30 @@ $patients = $reponse->fetchAll();
     <?php endforeach; ?>
 
 
+    <?php if(!isset($_REQUEST["s"])) : ?>
     <br><br>
     <nav aria-label="Patients navigation">
         <ul class="pagination">
-            <?php if($page > 1) : ?>
-            <li class="page-item"><a class="page-link" href="?p=<?=$page-1?>">Précédent</a></li>
+            <?php if ($page > 1) : ?>
+                <li class="page-item"><a class="page-link" href="?p=<?= $page - 1 ?>">Précédent</a></li>
             <?php endif; ?>
 
             <?php for ($i = 1; $i < $pageCount + 1; $i++) : ?>
                 <?php if ($i === $page) : ?>
                     <li class="page-item active">
-                        <a class="page-link" href="#"><?=$i?> <span class="sr-only">(current)</span></a>
+                        <a class="page-link" href="#"><?= $i ?> <span class="sr-only">(page courante)</span></a>
                     </li>
                 <?php else : ?>
                     <li class="page-item"><a class="page-link" href="?p=<?= $i ?>"><?= $i ?></a></li>
                 <?php endif; ?>
             <?php endfor; ?>
 
-            <?php if($page < $pageCount) : ?>
-                <li class="page-item"><a class="page-link" href="?p=<?=$page+1?>">Suivant</a></li>
+            <?php if ($page < $pageCount) : ?>
+                <li class="page-item"><a class="page-link" href="?p=<?= $page + 1 ?>">Suivant</a></li>
             <?php endif; ?>
         </ul>
     </nav>
+    <?php endif; ?>
 </div>
 
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/partials/footer.php'); ?>

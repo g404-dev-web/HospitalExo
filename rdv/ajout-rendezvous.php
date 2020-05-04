@@ -4,7 +4,7 @@ require_once($_SERVER['DOCUMENT_ROOT'].'/connexion.php');
 $patients = $bdd->query('SELECT * FROM patients')->fetchAll();
 
 ?><!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <title>Créer un rendez-vous pour un patient</title>
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/partials/head.php'); ?>
@@ -27,11 +27,11 @@ $patients = $bdd->query('SELECT * FROM patients')->fetchAll();
 
         <div id="newPatient" style="display:none">
             <h5>Nouveau patient : </h5>
-            <input type="text" placeholder="prénom" name="firstname" required>
-            <input type="text" placeholder="nom" name="lastname" required>
-            <input type="date" placeholder="date de naissance" name="birthdate" required>
-            <input type="text" placeholder="téléphone" name="phone" required>
-            <input type="text" placeholder="adresse" name="mail" required>
+            <input type="text" placeholder="prénom" name="firstname">
+            <input type="text" placeholder="nom" name="lastname">
+            <input type="date" placeholder="date de naissance" name="birthdate">
+            <input type="text" placeholder="téléphone" name="phone">
+            <input type="text" placeholder="adresse" name="mail">
         </div>
 
         <button type="submit" class="btn btn-primary">Valider</button>

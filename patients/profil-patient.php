@@ -2,7 +2,7 @@
 //connexion à la base de données
 require_once($_SERVER['DOCUMENT_ROOT'].'/connexion.php');
 //récupération du numéro id du patient
-$patientId = $_REQUEST['patientId'];
+$patientId = $_REQUEST["patientId"];
 
 // Préparation de la requête de récupération pars numéro id 
 $patientInfobyId = $bdd->prepare("  SELECT * FROM patients 
@@ -12,6 +12,7 @@ $patientInfobyId = $bdd->prepare("  SELECT * FROM patients
 $patientInfobyId->execute(array(
     $patientId
 ));
+
 
 // Préparation de la requête de récupération des rendez vous 
 //pour le client avec l'id contenu dans $patientId
@@ -30,7 +31,7 @@ $appointments = $patientAppointments->fetchAll();
 ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <title>Profil du patient <?=$patient['lastname']?> <?=$patient['firstname']?></title>
     <?php include($_SERVER['DOCUMENT_ROOT'] . '/partials/head.php'); ?>

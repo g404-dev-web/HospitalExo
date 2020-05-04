@@ -11,7 +11,7 @@ $reponse = $bdd->query('SELECT * FROM patients
 $appointments = $reponse->fetchAll();
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <title>création de patients</title>
 
@@ -30,10 +30,10 @@ $appointments = $reponse->fetchAll();
         echo "<br>".$appointment['dateHour'];
         echo "<br>Patient : ". $appointment['lastname']." ". $appointment['firstname']."<br>";
         echo    "<form action='delete-rdv.php' method='post'>
-                <input type='hidden' name='rdvId' value=".$appointment['id'].">
-                <button type='submit'>Supprimer ce rdv</button>
-                
+                    <input type='hidden' name='rdvId' value=".$appointment['id'].">
+                    <button type='submit'>Supprimer ce rdv</button>
                 </form>";
+        echo "<a href='details-rdv.php?id=".$appointment['id']."' class='btn btn-primary'>Détails</a>";
     }
     ?>
 
