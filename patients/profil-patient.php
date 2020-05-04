@@ -1,6 +1,6 @@
 <?php
 //connexion à la base de données
-include '../connexion.php';
+require_once($_SERVER['DOCUMENT_ROOT'].'/connexion.php');
 //récupération du numéro id du patient
 $patientId = $_REQUEST['patientId'];
 
@@ -40,6 +40,8 @@ $appointments = $patientAppointments->fetchAll();
 <?php include($_SERVER['DOCUMENT_ROOT'].'/partials/header.php'); ?>
 
 <div class="container">
+
+    <h1>Profil du patient <?=$patient['lastname']?> <?=$patient['firstname']?></h1>
     <!-- affichage des infos du patient -->
     <ul>
         <li>Nom : <?php echo $patient['lastname']?></li>
@@ -66,9 +68,11 @@ $appointments = $patientAppointments->fetchAll();
         <input type="text" name="phone" value="<?php echo $patient['phone']?>" required>
         <input type="text" name="mail" value="<?php echo $patient['mail']?>" required>
         <input type="hidden" name="patientId" value="<?php echo $patient['id']?>">
-        <button type="submit">Envoyer</button>
+        <br>
+        <button type="submit" class="btn btn-primary">Envoyer</button>
     </form>
 </div>
+<br><br><br>
 
 </body>
 </html>

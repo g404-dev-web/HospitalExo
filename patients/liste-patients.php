@@ -1,7 +1,7 @@
 <?php
 
 //connexion à la base de donnée
-include '../connexion.php';
+require_once($_SERVER['DOCUMENT_ROOT'].'/connexion.php');
 
 $page = isset($_REQUEST['p']) ? (int)$_REQUEST['p'] : 1;
 $resultsPerPage = 5;
@@ -29,7 +29,10 @@ $patients = $reponse->fetchAll();
 
 <?php include($_SERVER['DOCUMENT_ROOT'] . '/partials/header.php'); ?>
 
+
 <div class="container">
+
+    <h1>Liste des patients</h1>
 
     Il y a <?= $patientsCount ?> patient(s).<br>
     <a href="ajout-patient.php" class='btn btn-secondary'>Ajouter un patient</a>
@@ -42,11 +45,11 @@ $patients = $reponse->fetchAll();
             <div class="card-body">
                 <h5 class="card-title"><?= $patient['lastname'] ?> <?= $patient['firstname'] ?></h5>
                 numéro client : <?= $patient['id'] ?><br>
-                <form action='delete-patient.php' method='post'>
+                <form action='delete-patient.php' method='post' style="display:inline-block">
                     <input type='hidden' name='patientId' value="<?= $patient['id'] ?>">
-                    <button type='submit' class='btn btn-small btn-danger'>Supprimer ce patient</button>
+                    <button type='submit' class='btn btn-small btn-danger btn-sm'>Supprimer</button>
                 </form>
-                <a href='profil-patient.php?patientId=<?= $patient['id'] ?>' class='btn btn-primary'>Détails</a>
+                <a href='profil-patient.php?patientId=<?= $patient['id'] ?>' class='btn btn-primary btn-sm'>Détails</a>
             </div>
         </div>
     <?php endforeach; ?>

@@ -10,6 +10,9 @@
     <?php include($_SERVER['DOCUMENT_ROOT'].'/partials/header.php'); ?>
 
     <div class="container">
+
+        <h1>Ajouter un patient</h1>
+
         <!-- Formulaire d'ajout des rendez vous avec 5 inputs -->
         <form action="enregistrement_patient.php" method="post">
             <input type="text" placeholder="prénom" name="firstname" required>
@@ -17,7 +20,7 @@
             <input type="date" placeholder="date de naissance" name="birthdate" required>
             <input type="text" placeholder="téléphone" name="phone" required>
             <input type="text" placeholder="adresse" name="mail" required>
-            <button type="submit"> Valider </button>
+            <button type="submit" class="btn btn-primary"> Valider </button>
         </form>
     </div>
 

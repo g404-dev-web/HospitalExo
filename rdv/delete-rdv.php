@@ -1,6 +1,6 @@
 <?php
 //connexion à la base de données
-include '../connexion.php';
+require_once($_SERVER['DOCUMENT_ROOT'].'/connexion.php');
 
 //récupération de la date de rendez-vous
 $id = $_POST['rdvId'];

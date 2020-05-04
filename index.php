@@ -10,7 +10,7 @@
     <?php include('partials/header.php'); ?>
 
     <div class="container">
-        <a href="patients/liste-patient.php" class="btn btn-primary">Liste des patients</a>
+        <a href="patients/liste-patients.php" class="btn btn-primary">Liste des patients</a>
         <br>
         <br>
         <!-- Liens vers les formulaires d'ajout -->

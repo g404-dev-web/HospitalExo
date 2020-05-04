@@ -1,7 +1,7 @@
 <?php
 
 //connexion à la base de donnée
-include '../connexion.php';
+require_once($_SERVER['DOCUMENT_ROOT'].'/connexion.php');
 
 //Préparation de la requête avec jointure de table par l'id patients
 $reponse = $bdd->query('SELECT * FROM patients

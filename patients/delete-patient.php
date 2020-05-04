@@ -1,6 +1,6 @@
 <?php
 //connexion à la base de données
-include '../connexion.php';
+require_once($_SERVER['DOCUMENT_ROOT'].'/connexion.php');
 
 //récupération de la date de rendez-vous
 $id = $_POST['patientId'];
@@ -18,4 +18,4 @@ $req = $bdd->prepare("  DELETE FROM appointments
 $test = $req->execute(array($id));
 
 //redirection vers la liste des rendez vous
-header('Location: liste-patient.php');
+header('Location: liste-patients.php');

@@ -1,7 +1,7 @@
 <?php
 //connexion à la base de données
 
-include '../connexion.php';
+require_once($_SERVER['DOCUMENT_ROOT'].'/connexion.php');
 
 //récupération des données du patient
 
@@ -21,4 +21,4 @@ $req = $bdd->prepare("UPDATE patients
 $req->execute(array($lastname, $firstname, $birthdate, $phone, $mail, $id));
 
 //redirection vers la liste des rendez vous
-header('Location: liste-patient.php');
+header('Location: liste-patients.php');
